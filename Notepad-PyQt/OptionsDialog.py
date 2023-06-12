@@ -7,27 +7,20 @@ class OptionsDialog(QDialog):
     def __init__(self, text_edit, parent=None):
         super().__init__(parent)
 
-        self.setWindowTitle('Options')
+        self.setWindowTitle('Opcje')
         self.layout = QVBoxLayout()
 
-        self.font_size_label = QLabel('Font Size:')
-        self.layout.addWidget(self.font_size_label)
-
-        self.font_size_spinbox = QSpinBox()
-        self.font_size_spinbox.setRange(6, 72)
-        self.layout.addWidget(self.font_size_spinbox)
-
-        self.font_label = QLabel('Font:')
+        self.font_label = QLabel('Czcionka:')
         self.layout.addWidget(self.font_label)
 
-        self.font_button = QPushButton('Select Font')
+        self.font_button = QPushButton('Wybierz czcionkę')
         self.font_button.clicked.connect(self.select_font)
         self.layout.addWidget(self.font_button)
 
-        self.font_color_label = QLabel('Font Color:')
+        self.font_color_label = QLabel('Kolor czcionki:')
         self.layout.addWidget(self.font_color_label)
 
-        self.font_color_button = QPushButton('Select Color')
+        self.font_color_button = QPushButton('Wybierz kolor')
         self.font_color_button.clicked.connect(self.select_color)
         self.layout.addWidget(self.font_color_button)
 

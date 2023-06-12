@@ -5,7 +5,7 @@ class CompareDialog(QDialog):
     def __init__(self, text1, text2, parent=None):
         super().__init__(parent)
 
-        self.setWindowTitle('Compare Files')
+        self.setWindowTitle('Porównaj pliki')
         self.layout = QVBoxLayout()
 
         self.text_edit1 = QPlainTextEdit()
@@ -20,8 +20,8 @@ class CompareDialog(QDialog):
 
     def closeEvent(self, event):
         # Prompt to save changes for Untitled file
-        if self.parent().tab_widget.tabText(self.parent().tab_widget.currentIndex()) == 'Untitled':
-            reply = QMessageBox.question(self, 'Save File', 'Do you want to save the file?',
+        if self.parent().tab_widget.tabText(self.parent().tab_widget.currentIndex()) == 'Bez tytułu':
+            reply = QMessageBox.question(self, 'Zapisz plik', 'Czy chciałbyś zapisać plik?',
                                          QMessageBox.Save | QMessageBox.Discard | QMessageBox.Cancel)
             if reply == QMessageBox.Save:
                 self.parent().save_untitled_file()

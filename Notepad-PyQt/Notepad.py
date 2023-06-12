@@ -30,53 +30,53 @@ class Notepad(QMainWindow):
         self.create_new_tab()
         
         self.setGeometry(100, 100, 800, 600)
-        self.setWindowTitle('Notepad')
+        self.setWindowTitle('NotatnikPyQT')
         self.show()
 
     def init_menu_bar(self):
         menubar = self.menuBar()
 
-        file_menu = menubar.addMenu('File')
-        new_action = QAction('New', self)
+        file_menu = menubar.addMenu('Plik')
+        new_action = QAction('Nowy', self)
         new_action.setShortcut('Ctrl+N')
         new_action.triggered.connect(self.new_file)
         file_menu.addAction(new_action)
 
-        open_action = QAction('Open', self)
+        open_action = QAction('Otwórz', self)
         open_action.setShortcut('Ctrl+O')
         open_action.triggered.connect(self.open_file)
         file_menu.addAction(open_action)
 
-        save_action = QAction('Save', self)
+        save_action = QAction('Zapisz', self)
         save_action.setShortcut('Ctrl+S')
         save_action.triggered.connect(self.save_file)
         file_menu.addAction(save_action)
 
-        plugin_menu = menubar.addMenu('Plugins')
+        plugin_menu = menubar.addMenu('Wtyczki')
 
         plugin_group = QActionGroup(self)
         plugin_group.setExclusive(True)  # Only one plugin can be selected at a time
 
-        compare_action = QAction('Compare', self)
+        compare_action = QAction('Porównaj', self)
         compare_action.triggered.connect(self.compare_files)
         compare_action.setCheckable(True)
         plugin_group.addAction(compare_action)
         plugin_menu.addAction(compare_action)
 
-        options_menu = menubar.addMenu('Options')
+        options_menu = menubar.addMenu('Opcje')
 
-        personalize_action = QAction('Personalize', self)
+        personalize_action = QAction('Personalizuj', self)
         personalize_action.triggered.connect(self.show_options_dialog)
         options_menu.addAction(personalize_action)
 
-        about_menu = menubar.addMenu('About')
-        about_action = QAction('About', self)
+        about_menu = menubar.addMenu('O aplikacji')
+        about_action = QAction('O aplikacji', self)
         about_action.triggered.connect(self.show_about_dialog)
         about_menu.addAction(about_action)
 
     def create_new_tab(self):
         new_tab = QTextEdit()
-        self.tab_widget.addTab(new_tab, 'Untitled')
+        self.tab_widget.addTab(new_tab, 'Bez tytułu')
 
     def close_tab(self, index):
         self.tab_widget.removeTab(index)
@@ -85,7 +85,7 @@ class Notepad(QMainWindow):
         self.create_new_tab()
 
     def open_file(self):
-        file_path, _ = QFileDialog.getOpenFileName(self, 'Open File', '', 'Text Files (*.txt);;All Files (*.*)')
+        file_path, _ = QFileDialog.getOpenFileName(self, 'Otwórz plik', '', 'Pliki tekstowe (*.txt);;Wszystkie pliki (*.*)')
         if file_path:
             with open(file_path, 'r') as file:
                 text = file.read()
@@ -97,9 +97,9 @@ class Notepad(QMainWindow):
         current_tab_index = self.tab_widget.currentIndex()
         current_tab = self.tab_widget.widget(current_tab_index)
 
-        if self.tab_widget.tabText(current_tab_index) == 'Untitled':
+        if self.tab_widget.tabText(current_tab_index) == 'Bez tytułu':
             # If the file is untitled, prompt for the file path
-            file_path, _ = QFileDialog.getSaveFileName(self, 'Save File', '', 'Text Files (*.txt);;All Files (*.*)')
+            file_path, _ = QFileDialog.getSaveFileName(self, 'Zapisz plik', '', 'Pliki tekstowe (*.txt);;Wszystkie pliki (*.*)')
             if file_path:
                 with open(file_path, 'w') as file:
                     file.write(current_tab.toPlainText())
@@ -110,13 +110,13 @@ class Notepad(QMainWindow):
             file_path = self.tab_widget.tabText(current_tab_index)
             with open(file_path, 'w') as file:
                 file.write(current_tab.toPlainText())
-                
+                                                                                                             
     def compare_files(self):
         current_tab_index = self.tab_widget.currentIndex()
         current_tab = self.tab_widget.widget(current_tab_index)
         current_text = current_tab.toPlainText()
 
-        file_path, _ = QFileDialog.getOpenFileName(self, 'Select File to Compare', '', 'Text Files (*.txt);;All Files (*.*)')
+        file_path, _ = QFileDialog.getOpenFileName(self, 'Wybierz plik do porównania', '', 'Pliki tekstowe (*.txt);;Wszystkie pliki (*.*)')
         if file_path:
             with open(file_path, 'r') as file:
                 other_text = file.read()
@@ -150,7 +150,7 @@ class Notepad(QMainWindow):
         current_tab_index = self.tab_widget.currentIndex()
         current_tab = self.tab_widget.widget(current_tab_index)
 
-        file_path, _ = QFileDialog.getSaveFileName(self, 'Save File', '', 'Text Files (*.txt);;All Files (*.*)')
+        file_path, _ = QFileDialog.getSaveFileName(self, 'Zapisz plik', '', 'Pliki tekstowe (*.txt);;Wszystkie pliki (*.*)')
         if file_path:
             with open(file_path, 'w') as file:
                 file.write(current_tab.toPlainText())

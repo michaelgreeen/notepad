@@ -8,6 +8,7 @@ MAIN_FILE = Notepad.py
 # Create a virtual environment and install dependencies
 venv:
 	python -m venv env
+	.\env\Scripts\activate
 	$(PIP) install --upgrade pip
 	$(PIP) install -r requirements.txt
 
